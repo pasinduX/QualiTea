@@ -28,7 +28,7 @@ const predict = [
 
 //all routes in here are starting with /predict
 router.get('/', (req,res) => {
-  console.log('[TESTING]!');
+  console.log(predict);
 
   res.send(predict);
 
