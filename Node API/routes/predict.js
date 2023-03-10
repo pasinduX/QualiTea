@@ -5,6 +5,24 @@ const router = express.Router(); //initializing router
 const predict = [
   {
     teaGrade: "Low Fresh Best"
+  },
+  {
+    "teaGrade": "Low Fresh Below Best"
+  },
+  {
+    "teaGrade": "Low Fresh Poor"
+  },
+  
+  {
+    "teaGrade": "Low Withered Best"
+  },
+  
+  {
+    "teaGrade": "Low Withered Below Best"
+  },
+  
+  {
+    "teaGrade": "Low Withered Poor"
   }
 ]
 
