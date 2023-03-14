@@ -1,0 +1,11 @@
+version: '3'
+
+
+services:
+  web:
+    build: ./QualiTea
+    ports: 
+      - "105:105"
+
+
+    
