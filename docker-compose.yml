@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  web:
+    build: ./backend and ML
+    ports:
+      - "105:105"
