@@ -1,4 +1,16 @@
-# QualiTea
-software development group project
+# tea
 
-The tea industry plays a significant role in the Sri Lankan economy in terms of foreign exchange earnings and providing employment opportunities. With the fast-growing of Deep Learning, the intelligent and labour-free authentication of the tea quality, becomes a substantially demanded yet unexplored area, with two key problems yet to be solved: which are sampling of tea data, with a fast and environmentally friendly approach, and distinguishment of tea, in terms of building an accurate tea classifier. The purpose of this study is to analyse Sri Lanka’s tea to determine the grade and predict the price With a deep learning based approach to image classification, replacing  the traditional image classification models and using Convolutional Neural Networks (CNNs) to process the images to give a more accurate output.
+A new Flutter project.
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
