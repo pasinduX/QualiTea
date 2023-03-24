@@ -6,7 +6,6 @@ import 'dart:convert';
 // import 'dart:html' hide File;
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,6 +21,7 @@ class uploadImageDemo extends State<uploadImage> {
   File? selectedImage;
   String? message = "";
   File? selectedFinalImage;
+  var responseJson;
 
   uploadImage(File imageFile) async {
 // open a bytestream
@@ -30,7 +30,8 @@ class uploadImageDemo extends State<uploadImage> {
     var length = await imageFile.length();
 
     // string to uri
-    var uri = Uri.parse("http://127.0.0.1:5000/success");
+    var uri = Uri.parse(
+        "https://cff9-2402-d000-8128-56bb-800e-aeae-621e-ba7.in.ngrok.io/success");
 
     // create multipart request
     var request = new http.MultipartRequest("POST", uri);
@@ -46,31 +47,14 @@ class uploadImageDemo extends State<uploadImage> {
     var response = await request.send();
     print(response.statusCode);
 
-    // listen for response
-    response.stream.transform(utf8.decoder).listen((value) {
-      print(value);
+    print(response);
+    var responseString = await response.stream.transform(utf8.decoder).join();
+    // var responseJson = jsonDecode(responseString);
+    // var class1Value = responseJson['class1'];
+    // print('class1Value: ${class1Value}'); // listen for response
+    setState(() {
+      responseJson = jsonDecode(responseString);
     });
-
-    // final request = http.MultipartRequest("POST", Uri.parse("http://127.0.0.1:5000"));
-
-    // // final headers = {"Content-type": "mulipart/form-data"};
-    // Map<String, String> headers = {"Content-type": "multipart/form-data"};
-
-    // request.files.add(
-    //   http.MultipartFile(
-    //     'image',
-    //     selectedImage.readAsBytes().asStream(),
-    //     selectedImage.lengthSync(),
-    //     filename: selectedImage.path.split('/').last,
-    //   ),
-    // );
-
-    // request.headers.addAll(headers);
-    // final response = await request.send();
-    // http.Response res = await http.Response.fromStream(response);
-    // final resJson = jsonDecode(res.body);
-    // message = resJson['message'];
-    // setState(() {});
   }
 
   getImage() async {
@@ -116,94 +100,96 @@ class uploadImageDemo extends State<uploadImage> {
                     uploadImage(selectedImage!);
                   }
 
-                  showModalBottomSheet(
-                      context: context,
-                      // isDismissible: false,
-                      backgroundColor: Color.fromARGB(255, 195, 255, 160),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(30),
-                        topLeft: Radius.circular(30),
-                      )),
-                      builder: ((BuildContext context) {
-                        return Container(
-                          height: 270,
-                          child: ListView(
-                            children: [
-                              DataTable(
-                                columns: [
-                                  DataColumn(
-                                      label: Text(
-                                    'Category',
-                                    style: TextStyle(
-                                        fontSize: 15.0,
-                                        color: Color.fromARGB(255, 9, 58, 7),
-                                        fontWeight: FontWeight.bold),
-                                  )),
-                                  DataColumn(
-                                      label: Text(
-                                    'Probability',
-                                    style: TextStyle(
-                                        fontSize: 15.0,
-                                        color: Color.fromARGB(255, 9, 58, 7),
-                                        fontWeight: FontWeight.bold),
-                                  )),
-                                ],
-                                rows: [
-                                  DataRow(cells: [
-                                    DataCell(Text(
-                                      'Row 1, Column 1',
+                  if (responseJson != null) {
+                    showModalBottomSheet(
+                        context: context,
+                        // isDismissible: false,
+                        backgroundColor: Color.fromARGB(255, 195, 255, 160),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(30),
+                          topLeft: Radius.circular(30),
+                        )),
+                        builder: ((BuildContext context) {
+                          return Container(
+                            height: 270,
+                            child: ListView(
+                              children: [
+                                DataTable(
+                                  columns: [
+                                    DataColumn(
+                                        label: Text(
+                                      'Category',
                                       style: TextStyle(
-                                        fontSize: 13.0,
-                                        color: Color.fromARGB(255, 0, 0, 0),
-                                      ),
+                                          fontSize: 15.0,
+                                          color: Color.fromARGB(255, 9, 58, 7),
+                                          fontWeight: FontWeight.bold),
                                     )),
-                                    DataCell(Text(
-                                      'Row 1, Column 2',
+                                    DataColumn(
+                                        label: Text(
+                                      'Probability',
                                       style: TextStyle(
-                                        fontSize: 13.0,
-                                        color: Color.fromARGB(255, 0, 0, 0),
-                                      ),
+                                          fontSize: 15.0,
+                                          color: Color.fromARGB(255, 9, 58, 7),
+                                          fontWeight: FontWeight.bold),
                                     )),
-                                  ]),
-                                  DataRow(cells: [
-                                    DataCell(Text(
-                                      'Row 2, Column 1',
-                                      style: TextStyle(
-                                        fontSize: 13.0,
-                                        color: Color.fromARGB(255, 0, 0, 0),
-                                      ),
-                                    )),
-                                    DataCell(Text(
-                                      'Row 2, Column 2',
-                                      style: TextStyle(
-                                        fontSize: 13.0,
-                                        color: Color.fromARGB(255, 0, 0, 0),
-                                      ),
-                                    )),
-                                  ]),
-                                  DataRow(cells: [
-                                    DataCell(Text(
-                                      'Row 2, Column 1',
-                                      style: TextStyle(
-                                        fontSize: 13.0,
-                                        color: Color.fromARGB(255, 0, 0, 0),
-                                      ),
-                                    )),
-                                    DataCell(Text(
-                                      'Row 2, Column 2',
-                                      style: TextStyle(
-                                        fontSize: 13.0,
-                                        color: Color.fromARGB(255, 0, 0, 0),
-                                      ),
-                                    )),
-                                  ]),
-                                ],
-                              )
-                            ],
-                          ),
-                        );
-                      }));
+                                  ],
+                                  rows: [
+                                    DataRow(cells: [
+                                      DataCell(Text(
+                                        'Class 1',
+                                        style: TextStyle(
+                                          fontSize: 13.0,
+                                          color: Color.fromARGB(255, 0, 0, 0),
+                                        ),
+                                      )),
+                                      DataCell(Text(
+                                        responseJson['class1'],
+                                        style: TextStyle(
+                                          fontSize: 13.0,
+                                          color: Color.fromARGB(255, 0, 0, 0),
+                                        ),
+                                      )),
+                                    ]),
+                                    DataRow(cells: [
+                                      DataCell(Text(
+                                        'Class 2',
+                                        style: TextStyle(
+                                          fontSize: 13.0,
+                                          color: Color.fromARGB(255, 0, 0, 0),
+                                        ),
+                                      )),
+                                      DataCell(Text(
+                                        responseJson['class2'],
+                                        style: TextStyle(
+                                          fontSize: 13.0,
+                                          color: Color.fromARGB(255, 0, 0, 0),
+                                        ),
+                                      )),
+                                    ]),
+                                    DataRow(cells: [
+                                      DataCell(Text(
+                                        'Class 3',
+                                        style: TextStyle(
+                                          fontSize: 13.0,
+                                          color: Color.fromARGB(255, 0, 0, 0),
+                                        ),
+                                      )),
+                                      DataCell(Text(
+                                        responseJson['class3'],
+                                        style: TextStyle(
+                                          fontSize: 13.0,
+                                          color: Color.fromARGB(255, 0, 0, 0),
+                                        ),
+                                      )),
+                                    ]),
+                                  ],
+                                )
+                              ],
+                            ),
+                          );
+                        }));
+                  }
                 },
                 icon: Icon(Icons.upload_file, color: Colors.white),
                 label: Text(
