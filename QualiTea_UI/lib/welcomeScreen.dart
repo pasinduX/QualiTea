@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/uploadImage.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:tea/uploadImage.dart';
 
 class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -28,27 +27,39 @@ class WelcomeScreen extends StatelessWidget {
                     borderRadius:
                         BorderRadius.only(bottomRight: Radius.circular(70)),
                   ),
-                  child: Center(
-                    child: Image.asset(
-                      "lib/images/logo.png",
-                      alignment: Alignment.topCenter,
-                      scale: 2,
-                    )
-                  ),
                 ),
-                // Padding(
-                //   padding: EdgeInsets.all(120),
-                //   child: Container(
-                //     width: MediaQuery.of(context).size.width,
-                //     height: MediaQuery.of(context).size.height / 3,
-                //     decoration: BoxDecoration(
-                //       image: DecorationImage(
-                //         image: AssetImage("lib/images/tea.png"),
-                //         // fit: BoxFit.cover,
+                // Container(
+                //   constraints: BoxConstraints(
+                //     maxHeight: MediaQuery.of(context).size.height / 8,
+                //     maxWidth: MediaQuery.of(context).size.width,
+                //   ),
+                //   child: Align(
+                //     alignment: Alignment.topCenter,
+                //     child: SizedBox(
+                //       child: Center(
+                //         child: Image.asset(
+                //           "lib/images/logo.png",
+                //           width: 350,
+                //           height: 350,
+                //           scale: 1.2,
+                //         ),
                 //       ),
                 //     ),
                 //   ),
                 // ),
+                Padding(
+                  padding: EdgeInsets.all(120),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height / 3,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('images/tea.png'),
+                        // fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
             Align(
@@ -75,15 +86,14 @@ class WelcomeScreen extends StatelessWidget {
                     SizedBox(height: 12),
                     Text(
                       "Get to know tea with QualiTea",
-                      
-                      style: GoogleFonts.lobster(
-                        textStyle: TextStyle(
-                        fontSize: 20,
+                      // textAlign: TextAlign.center,
+
+                      style: TextStyle(
+                        fontSize: 18,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 1,
                         wordSpacing: 2,
                         color: Color.fromARGB(255, 195, 255, 160),
-                      ),
                       ),
                     ),
                     SizedBox(height: 60),
