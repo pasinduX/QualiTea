@@ -1,6 +1,6 @@
 {
-    "name": "testapp",
-    "short_name": "testapp",
+    "name": "teatwo",
+    "short_name": "teatwo",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
