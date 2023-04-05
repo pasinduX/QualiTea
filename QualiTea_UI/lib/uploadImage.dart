@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:testapp/TeaPage.dart';
 
 class uploadImage extends StatefulWidget {
   uploadImage() : super();
@@ -31,7 +32,7 @@ class uploadImageDemo extends State<uploadImage> {
 
     // string to uri
     var uri = Uri.parse(
-        "https://cff9-2402-d000-8128-56bb-800e-aeae-621e-ba7.in.ngrok.io/success");
+        "https://3e54-168-138-182-121.ap.ngrok.io/success");
 
     // create multipart request
     var request = new http.MultipartRequest("POST", uri);
@@ -73,7 +74,8 @@ class uploadImageDemo extends State<uploadImage> {
         title: Text(widget.title),
         backgroundColor: Color.fromARGB(255, 9, 58, 7),
       ),
-      body: Center(
+      body: Container(
+        color: Color.fromRGBO(208, 252, 170, 1),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -206,7 +208,7 @@ class uploadImageDemo extends State<uploadImage> {
                 children: [
                   SizedBox(height: 30),
                   Container(
-                    color: Color.fromARGB(255, 195, 255, 160),
+                    color: Color.fromRGBO(91, 212, 84, 1),
                     child: Text(
                       "Our app will determine the relevant tea grade and the price range of the leaf images uploaded by you.",
                       textAlign: TextAlign.center,
@@ -218,7 +220,7 @@ class uploadImageDemo extends State<uploadImage> {
                   ),
                   SizedBox(height: 20),
                   Container(
-                    color: Color.fromARGB(255, 195, 255, 160),
+                    color: Color.fromRGBO(91, 212, 84, 1),
                     child: Text(
                       "We will also provide you with additional information about your images based on our system's capabilities.",
                       textAlign: TextAlign.center,
@@ -228,13 +230,43 @@ class uploadImageDemo extends State<uploadImage> {
                       ),
                     ),
                   ),
-                ],
+                   SizedBox(height: 60),
+                    Material(
+                      color: Color.fromARGB(255, 9, 58, 7),
+                      borderRadius: BorderRadius.circular(10),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TeaPage()));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 50),
+                          child: Text(
+                            "Next",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255),   
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              
+                              letterSpacing: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
           ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
+        ),),
+
+      floatingActionButton: Positioned(
+        child: Align(
+    alignment: Alignment.bottomRight,
+        child: FloatingActionButton(
         onPressed: getImage,
         backgroundColor: Color.fromARGB(255, 9, 58, 7),
         child: Icon(
@@ -242,6 +274,7 @@ class uploadImageDemo extends State<uploadImage> {
         ),
         // foregroundColor: Color.fromARGB(255, 9, 58, 7),
       ),
+      ),),
     );
   }
 }

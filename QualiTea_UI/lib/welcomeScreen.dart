@@ -78,7 +78,7 @@ class WelcomeScreen extends StatelessWidget {
                       
                       style: GoogleFonts.lobster(
                         textStyle: TextStyle(
-                        fontSize: 20,
+                        fontSize: 23,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 1,
                         wordSpacing: 2,
@@ -104,7 +104,7 @@ class WelcomeScreen extends StatelessWidget {
                             "Get Start",
                             style: TextStyle(
                               color: Color.fromARGB(255, 9, 58, 7),
-                              fontSize: 16,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold,
                               letterSpacing: 1,
                             ),
