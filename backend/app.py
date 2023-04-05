@@ -2,6 +2,8 @@ from flask import Flask
 import os
 import uuid
 import urllib
+import tensorflow as tf
+import numpy as np
 from PIL import Image
 from tensorflow.keras.models import load_model
 from flask import Flask, render_template, request, send_file
@@ -50,7 +52,31 @@ def predict(filename, model):
 
     return class_result, prob_result
 
+def predict_is_tea_leaf(img_path, model):
+    # Load the image
+    img = tf.keras.preprocessing.image.load_img(img_path, target_size=(150, 150))
 
+    # Convert the image to a numpy array
+    img_array = tf.keras.preprocessing.image.img_to_array(img)
+
+    # Reshape the array to match the input shape of the model
+    img_array = np.expand_dims(img_array, axis=0)
+
+    # Preprocess the input
+    img_array = tf.keras.applications.mobilenet_v2.preprocess_input(img_array)
+
+    # Make the prediction
+    predictions = model.predict(img_array)
+
+    # Extract the output
+    prediction = predictions[0][0]
+
+    # Return True if the image contains a tea leaf and False otherwise
+    if prediction < 0.5:
+        return False
+    else:
+        return True
+    
 @app.route('/')
 def home():
     return "this is home"
@@ -74,6 +100,7 @@ def success():
                 img = filename
 
                 class_result, prob_result = predict(img_path, model)
+                is_tea_leaf = predict_is_tea_leaf(img_path, model)
 
                 predictions = {
                     "class1": class_result[0],
@@ -82,11 +109,25 @@ def success():
                     "prob1": prob_result[0],
                     "prob2": prob_result[1],
                     "prob3": prob_result[2],
+                    "isTeaLeaf": True,
+                    "message": "This is a tea leaf",
                 }
 
             except Exception as e:
                 print(str(e))
                 error = 'This image from this site is not accesible or inappropriate input'
+
+            if is_tea_leaf is False:
+                predictions = {
+                    "class1": "Please Enter a Tea Leaf and Proceed",
+                    "class2": "Please Enter a Tea Leaf and Proceed",
+                    "class3": "Please Enter a Tea Leaf and Proceed",
+                    "prob1": "Please Enter a Tea Leaf and Proceed",
+                    "prob2": "Please Enter a Tea Leaf and Proceed",
+                    "prob3": "Please Enter a Tea Leaf and Proceed",
+                    "isTeaLeaf": False,
+                    "message": "Please enter a leaf and try again",
+                }
 
             if (len(error) == 0):
                 return predictions
@@ -101,6 +142,7 @@ def success():
                 img = file.filename
 
                 class_result, prob_result = predict(img_path, model)
+                is_tea_leaf = predict_is_tea_leaf(img_path, model)
 
                 predictions = {
                     "class1": class_result[0],
@@ -109,11 +151,25 @@ def success():
                     "prob1": prob_result[0],
                     "prob2": prob_result[1],
                     "prob3": prob_result[2],
+                    "isTeaLeaf": True,
+                    "message": "This is a tea leaf",
                 }
 
             else:
                 error = "Please upload images of jpg , jpeg and png extension only"
 
+            if is_tea_leaf is False:
+                predictions = {
+                    "class1": "Please Enter a Tea Leaf and Proceed",
+                    "class2": "Please Enter a Tea Leaf and Proceed",
+                    "class3": "Please Enter a Tea Leaf and Proceed",
+                    "prob1": "Please Enter a Tea Leaf and Proceed",
+                    "prob2": "Please Enter a Tea Leaf and Proceed",
+                    "prob3": "Please Enter a Tea Leaf and Proceed",
+                    "isTeaLeaf": False,
+                    "message": "Please enter a leaf and try again",
+                }
+                
             if (len(error) == 0):
                 return predictions
             else:
