@@ -31,8 +31,7 @@ class uploadImageDemo extends State<uploadImage> {
     var length = await imageFile.length();
 
     // string to uri
-    var uri = Uri.parse(
-        "https://3e54-168-138-182-121.ap.ngrok.io/success");
+    var uri = Uri.parse("https://8402-168-138-182-121.ap.ngrok.io/success");
 
     // create multipart request
     var request = new http.MultipartRequest("POST", uri);
@@ -208,7 +207,11 @@ class uploadImageDemo extends State<uploadImage> {
                 children: [
                   SizedBox(height: 30),
                   Container(
-                    color: Color.fromRGBO(91, 212, 84, 1),
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(91, 212, 84, 1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    
                     child: Text(
                       "Our app will determine the relevant tea grade and the price range of the leaf images uploaded by you.",
                       textAlign: TextAlign.center,
@@ -220,7 +223,11 @@ class uploadImageDemo extends State<uploadImage> {
                   ),
                   SizedBox(height: 20),
                   Container(
-                    color: Color.fromRGBO(91, 212, 84, 1),
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(91, 212, 84, 1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    
                     child: Text(
                       "We will also provide you with additional information about your images based on our system's capabilities.",
                       textAlign: TextAlign.center,
@@ -230,51 +237,49 @@ class uploadImageDemo extends State<uploadImage> {
                       ),
                     ),
                   ),
-                   SizedBox(height: 60),
-                    Material(
-                      color: Color.fromARGB(255, 9, 58, 7),
-                      borderRadius: BorderRadius.circular(10),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => TeaPage()));
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 50),
-                          child: Text(
-                            "Next",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),   
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              
-                              letterSpacing: 1,
-                            ),
+                  SizedBox(height: 60),
+                  Material(
+                    color: Color.fromARGB(255, 9, 58, 7),
+                    borderRadius: BorderRadius.circular(10),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => TeaPage()));
+                      },
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                        child: Text(
+                          "Next",
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1,
                           ),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
+            ),
           ],
-        ),),
-
+        ),
+      ),
       floatingActionButton: Positioned(
         child: Align(
-    alignment: Alignment.bottomRight,
-        child: FloatingActionButton(
-        onPressed: getImage,
-        backgroundColor: Color.fromARGB(255, 9, 58, 7),
-        child: Icon(
-          Icons.add_a_photo,
+          alignment: Alignment.bottomRight,
+          child: FloatingActionButton(
+            onPressed: getImage,
+            backgroundColor: Color.fromARGB(255, 9, 58, 7),
+            child: Icon(
+              Icons.add_a_photo,
+            ),
+            // foregroundColor: Color.fromARGB(255, 9, 58, 7),
+          ),
         ),
-        // foregroundColor: Color.fromARGB(255, 9, 58, 7),
       ),
-      ),),
     );
   }
 }

@@ -36,19 +36,6 @@ class WelcomeScreen extends StatelessWidget {
                     )
                   ),
                 ),
-                // Padding(
-                //   padding: EdgeInsets.all(120),
-                //   child: Container(
-                //     width: MediaQuery.of(context).size.width,
-                //     height: MediaQuery.of(context).size.height / 3,
-                //     decoration: BoxDecoration(
-                //       image: DecorationImage(
-                //         image: AssetImage("lib/images/tea.png"),
-                //         // fit: BoxFit.cover,
-                //       ),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
             Align(
